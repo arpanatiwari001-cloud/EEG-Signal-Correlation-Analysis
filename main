@@ -1,0 +1,36 @@
+# EEG Signal Correlation & Synchronization Analysis
+
+This module provides a framework for analyzing multi-channel EEG signals to identify neural synchronization patterns. By utilizing cross-correlation and covariance matrices, the system distinguishes between baseline random brain activity and synchronized pathological states like seizures.
+
+## Goals
+* **Signal Characterization:** Differentiate between random EEG noise, directional spike propagation, and global seizure synchronization.
+* **Time-Lag Analysis:** Quantify the delay (lag) between neural events across different electrode channels.
+* **Feature Extraction:** Generate correlation coefficients and covariance peaks to be used as inputs for diagnostic ML models.
+* **Visualization:** Provide clear graphical representations of signal relationships in both time and lag domains.
+
+## Key Terms
+* **Cross-Correlation ($R_{xy}$):** A measure of similarity between two signals as a function of the displacement of one relative to the other.
+* **Covariance Matrix:** A matrix indicating how much the EEG signals from different channels change together.
+* **Spike Propagation:** The movement of a neural discharge from one region of the brain to another, identified by a specific time lag in correlation peaks.
+* **Seizure Synchronization:** A state where multiple EEG channels show high correlation with near-zero lag.
+
+## Signal Processing Pipeline
+1. **Preprocessing:** Baseline drift removal and filtering of raw EEG data.
+2. **Autocorrelation:** Performed on individual channels to identify periodic components.
+3. **Cross-Correlation:** Calculated between channel pairs to find temporal relationships.
+4. **Lag Estimation:** Identifying the $t$ value where $R_{xy}(t)$ is maximized.
+
+## Features
+
+### 1. Random Activity Detection
+Analyzes signals with low mutual information where the cross-correlation remains near zero across all lags.
+
+### 2. Spike Propagation Tracking
+Detects shifted correlation peaks to calculate the exact millisecond delay in neural propagation.
+
+### 3. Seizure Synchronization Analysis
+Identifies high-amplitude, zero-lag peaks across the entire electrode array.
+
+## Tech Stack
+* **Language:** Python 3.x
+* **Libraries:** NumPy, Matplotlib, SciPy
